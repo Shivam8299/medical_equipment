@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const productCategories = [
   {
@@ -38,6 +38,18 @@ const productCategories = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setProductsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-border">
@@ -65,14 +77,24 @@ export default function Header() {
             </div>
 
             {/* Products Mega Menu */}
-            <div className="group">
-              <button className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
+            <div className="group" ref={dropdownRef}>
+              <button
+                onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
+                className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1"
+              >
                 Products
-                <ChevronDown size={16} className="group-hover:rotate-180 transition-transform" />
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${productsDropdownOpen ? "rotate-180" : "group-hover:rotate-180"
+                    }`}
+                />
               </button>
 
               {/* Mega Menu Dropdown */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:block bg-white border border-border rounded-lg shadow-xl pt-2 w-screen max-w-4xl">
+              <div
+                className={`absolute left-1/2 -translate-x-1/2 top-full bg-white border border-border rounded-lg shadow-xl pt-2 w-screen max-w-4xl z-50 ${productsDropdownOpen ? "block" : "hidden group-hover:block"
+                  }`}
+              >
                 <div className="p-6">
                   <div className="grid grid-cols-3 gap-6">
                     {productCategories.map((category) => (
