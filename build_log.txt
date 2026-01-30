@@ -1,0 +1,35 @@
+
+> build
+> yarn build:client && yarn build:server
+
+yarn run v1.22.22
+$ vite build
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 5 modules transformed.
+✗ Build failed in 400ms
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+/home/vikas/Downloads/medical-equipment-redesign-adc/client/pages/Index.tsx:256:10: ERROR: Unexpected closing "div" tag does not match opening "motion.div" tag
+file: /home/vikas/Downloads/medical-equipment-redesign-adc/client/pages/Index.tsx:256:10
+
+Unexpected closing "div" tag does not match opening "motion.div" tag
+254 |                </div>
+255 |              ))}
+256 |          </div>
+    |            ^
+257 |      </div>
+258 |        </section >
+
+    at failureErrorWithLog (/home/vikas/Downloads/medical-equipment-redesign-adc/node_modules/esbuild/lib/main.js:1467:15)
+    at /home/vikas/Downloads/medical-equipment-redesign-adc/node_modules/esbuild/lib/main.js:736:50
+    at responseCallbacks.<computed> (/home/vikas/Downloads/medical-equipment-redesign-adc/node_modules/esbuild/lib/main.js:603:9)
+    at handleIncomingPacket (/home/vikas/Downloads/medical-equipment-redesign-adc/node_modules/esbuild/lib/main.js:658:12)
+    at Socket.readFromStdout (/home/vikas/Downloads/medical-equipment-redesign-adc/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
