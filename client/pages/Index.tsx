@@ -16,7 +16,7 @@ import * as React from "react";
 
 export default function Index() {
   return (
-    <div className="w-full max-w-7xl mx-auto min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white">
       <Header />
       <Hero />
       <ServicesOverview />
